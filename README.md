@@ -13,33 +13,39 @@
 </p>
 </div>
 
-## Table of Contents 
+## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [✨ Features](#-features)
 - [🤔 Motivation](#-motivation)
 - [🖐 Requirements](#-requirements)
 - [⏳ Installation](#-installation)
 - [🔧 Configuration](#-configuration)
+  - [Minimal Configuration](#minimal-configuration)
+  - [Full Configuration](#full-configuration)
 - [🚚 Usage](#-usage)
+  - [Example](#example)
+  - [Bootstrap Example](#bootstrap-example)
 - [Contributing](#contributing)
 - [License](#license)
+- [⭐️Did you find this helpful?](#️did-you-find-this-helpful)
+- [Links](#links)
 
 ## ✨ Features
 
 Drop-in* replacement for the Strapi cron plugin that uses Redlock to prevent multiple instances of Strapi from running the same cron job at the same time.
 
-\* requires minimal configuration.
-
-
+\* requires minimal configuration
 
 ## 🤔 Motivation
-Currently, if you horizontally scale Strapi and use the cron plugin, you will end up with multiple instances of Strapi running the same cron job at the same time. This can cause issues with your database or other services that you are trying to integrate with.
+
+Currently, if you horizontally scale Strapi and use the cron feature, you will end up with multiple instances of Strapi running the same cron job at the same time, potentially causing race conditions. This can cause issues with your database or other services that you are trying to integrate with.
 
 ## 🖐 Requirements
 
 Install and configure the [Strapi Redis Plugin](https://github.com/strapi-community/strapi-plugin-redis)
 
-This plugin needs to be registered before the cron plugin.
+This plugin needs to be registered and configured before the cron plugin.
 
 ## ⏳ Installation
 
@@ -53,43 +59,40 @@ npm install strapi-plugin-redcron --save
 
 ## 🔧 Configuration
 
- 
-
 ### Minimal Configuration
 
 ```js
 module.exports = {
-    redis: {
-        // your redis config
-    },
-    redcron: {
-        enabled: true,
-    },
-
+  redis: {
+    // your redis config
+  },
+  redcron: {
+    enabled: true,
+  },
 }
 ```
 
 ### Full Configuration
+
 ```js
 module.exports = {
-    redis: {
-        // your redis config
+  redis: {
+    // your redis config
+  },
+  redcron: {
+    config: {
+      redlockConfig: {
+        driftFactor: 0.01,
+        retryCount: 10,
+        retryDelay: 200,
+        retryJitter: 200,
+      },
+      lockDelay: null,
+      lockTTL: 5000,
+      debug: false,
     },
-    redcron: {
-        config: {
-            redlockConfig: {
-                driftFactor: 0.01,
-                retryCount: 10,
-                retryDelay: 200,
-                retryJitter: 200,
-            },
-            lockDelay: null,
-            lockTTL: 5000,
-            debug: false,
-        },
-        enabled: true,
-    },
-
+    enabled: true,
+  },
 }
 ```
 
@@ -99,59 +102,61 @@ Adding the `bypassRedcron` property to your cron job will bypass the redlock log
 
 This plugin requires you to use the object format of the cron config. Adding a `name` is encouraged but not required. If you don't add a name it will use the key as the name. If you have multiple cron jobs with overlapping names this could cause issues.
 
-Example:
+If you need assistance understanding the cron syntax check out [CronTab Guru](https://crontab.guru).
+
+### Example
+
 ```js
 // path: ./config/cron-tasks.js
 
 module.exports = {
-  
-myJob: {
-     task: ({ strapi }) => {/* Add your own logic here */ },
-     name: 'myJob', // optional defaults to key
-     bypassRedcron: false, // optional
-     options: {
-        rule: '0 0 1 * * 1',
-     },
-   },
- };
+  myJob: {
+    task: ({ strapi }) => {/* Add your own logic here */ },
+    name: 'myJob', // optional defaults to key
+    bypassRedcron: false, // optional
+    options: {
+      rule: '0 0 1 * * 1',
+    },
+  },
+};
 ```
-Bootstrap Example:
+
+### Bootstrap Example
+
 ```js
 bootstrap({ strapi }) {
-    strapi.cron.add({
-      myJob: {
-        task: async ({ strapi }) => {
-          console.log("hello from bootstrap")
-
-        },
-        bypassRedcron: false, // optional
-        name: 'myJob2', // optional defaults to key
-        options: {
-            rule: '*/10 * * * * *',
-        }
+  strapi.cron.add({
+    myJob: {
+      task: async ({ strapi }) => {
+        console.log("hello from bootstrap")
       },
-    })
-  },
+      bypassRedcron: false, // optional
+      name: 'myJob2', // optional defaults to key
+      options: {
+        rule: '*/10 * * * * *',
+      }
+    },
+  })
+},
 ```
-
-
 
 ## Contributing
 
-Feel free to open a PR if you want to contribute to this project. 
+Feel free to open a PR if you want to contribute to this project.
 
 You can spin up a new Redis cluster for testing by running `docker-compose up` in the root of the project.
 You can run Strapi multiple strapi instances at the same time by adding `server.js` to the root of your wrapper project
+
 ```js
 //server.js
-#!/usr/bin/env node
 'use strict';
 
 // Start Strapi
 const strapi = require('@strapi/strapi');
 strapi().start();
 ```
-and running 
+
+and running
 
 `pm2 start --name="mystrapiapp" server.js -i 2`
 
@@ -160,11 +165,11 @@ and running
 See the [LICENSE](./LICENSE.md) file for licensing information.
 
 ## ⭐️Did you find this helpful?
-If you found this plugin helpful give it a star?
 
+If you found this plugin helpful give it a star?
 
 ## Links
 
- - [NPM Package](https://www.npmjs.com/package/strapi-plugin-redcron)
- - [Github](https://github.com/excl-networks/strapi-plugin-redcron)
- - [MIT License](LICENSE.md)
+- [NPM Package](https://www.npmjs.com/package/strapi-plugin-redcron)
+- [Github](https://github.com/excl-networks/strapi-plugin-redcron)
+- [MIT License](LICENSE.md)
