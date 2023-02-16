@@ -1,5 +1,5 @@
 <div align="center">
-<h1>Strapi Redis Plugin</h1>
+<h1>Redcron</h1>
 	
 <p style="margin-top: 0;">A drop in replacement for the Strapi cron plugin that uses Redlock to prevent multiple instances of Strapi from running the same cron job at the same time.</p>
 	
