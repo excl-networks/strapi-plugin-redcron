@@ -22,6 +22,10 @@
   "author": {
     "name": "Excl Networks Inc."
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/excl-networks/strapi-plugin-redcron"
+  },
   "maintainers": [
     {
       "name": "Excl Networks Inc."
