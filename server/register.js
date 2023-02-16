@@ -24,11 +24,8 @@ module.exports = ({ strapi }) => {
           debug(`Job ${name} failed to acquire lock`)
         } finally {
           // wait some time so other processes will lose the lock
-          let lockDelay = config.lockDelay
-            ? config.lockDelay
-            : config.redlockConfig.retryCount *
-            (config.redlockConfig.retryDelay +
-              config.redlockConfig.retryJitter)
+          let lockDelay = config.lockDelay ? config.lockDelay : config.redlockConfig.retryCount
+            * (config.redlockConfig.retryDelay + config.redlockConfig.retryJitter)
           debug(`Job ${name} waiting ${lockDelay}ms before releasing lock`)
           await new Promise((resolve) => setTimeout(resolve, lockDelay))
           if (lock) {

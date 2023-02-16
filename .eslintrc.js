@@ -16,5 +16,7 @@ module.exports = {
     semi: ['error', 'never'],
     'no-undef': 'off',
     'no-unused-vars': 'warn',
+    // max line length
+    'max-len': ['error', { code: 120 }],
   },
 }
