@@ -1,0 +1,39 @@
+{
+  "name": "strapi-plugin-redcron",
+  "version": "0.0.1",
+  "description": "A drop in replacement for the Strapi cron plugin that uses Redlock to prevent multiple instances of Strapi from running the same cron job at the same time.",
+  "strapi": {
+    "name": "redcron",
+    "description": "A drop in replacement for the Strapi cron plugin that uses Redlock to prevent multiple instances of Strapi from running the same cron job at the same time.",
+    "kind": "plugin",
+    "displayName": "Redcron"
+  },
+  "peerDependencies": {
+    "@strapi/strapi": "^4.0.0"
+  },
+  "scripts": {
+    "lint:js": "eslint --ext \".js\" --ignore-path .gitignore .",
+    "lint": "npm run lint:js"
+  },
+  "dependencies": {
+    "debug": "^4.3.4",
+    "redlock": "^5.0.0-beta.2"
+  },
+  "author": {
+    "name": "Excl Networks Inc."
+  },
+  "maintainers": [
+    {
+      "name": "Excl Networks Inc."
+    }
+  ],
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.34.0"
+  },
+  "engines": {
+    "node": ">=14.19.1 <=18.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}
