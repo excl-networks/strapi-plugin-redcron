@@ -169,6 +169,6 @@ If you found this plugin helpful give it a star?
 
 ## Links
 
- - [NPM Package](https://www.npmjs.com/package/strapi-plugin-ezforms)
- - [Github](https://github.com/excl-networks/strapi-plugin-ezforms)
+ - [NPM Package](https://www.npmjs.com/package/strapi-plugin-redcron)
+ - [Github](https://github.com/excl-networks/strapi-plugin-redcron)
  - [MIT License](LICENSE.md)
