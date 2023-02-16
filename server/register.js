@@ -50,9 +50,11 @@ module.exports = ({ strapi }) => {
         typeof taskValue.task === 'function' &&
         taskValue.bypassRedcron !== true
       ) {
+        // fallback to key if no name is provided
+        const taskName = taskValue.name || key
         taskValue.task = generateRedlockFunction(
           taskValue.task,
-          'redcron:' + taskValue.name
+          'redcron:' + taskName
         )
       }
     })

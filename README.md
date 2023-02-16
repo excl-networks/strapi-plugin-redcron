@@ -28,7 +28,7 @@
 
 Drop-in* replacement for the Strapi cron plugin that uses Redlock to prevent multiple instances of Strapi from running the same cron job at the same time.
 
-* requires minimal configuration.
+\* requires minimal configuration.
 
 
 
@@ -95,12 +95,6 @@ module.exports = {
 
 ## 🚚 Usage
 
-
-### :warning: Warning 
-You must use the object format for the cron jobs and include a name property.
-
-You will need to update your existing cron jobs to add a name.
-
 Adding the `bypassRedcron` property to your cron job will bypass the redlock logic and allow multiple instances of Strapi to run the same cron job at the same time.
 
 Example:
@@ -111,7 +105,7 @@ module.exports = {
   
 myJob: {
      task: ({ strapi }) => {/* Add your own logic here */ },
-     name: 'myJob',
+     name: 'myJob', // optional defaults to key
      bypassRedcron: false, // optional
      options: {
         rule: '0 0 1 * * 1',
@@ -129,7 +123,7 @@ bootstrap({ strapi }) {
 
         },
         bypassRedcron: false, // optional
-        name: 'myJob2',
+        name: 'myJob2', // optional defaults to key
         options: {
             rule: '*/10 * * * * *',
         }
