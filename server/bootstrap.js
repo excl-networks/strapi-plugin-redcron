@@ -1,8 +1,6 @@
 'use strict'
 const debug = require('debug')
 module.exports = ({ strapi }) => {
-  // bootstrap phase
-  console.log(strapi.config.get('plugin.redcron'))
   if (!strapi.redis) {
     return strapi.log.error('redcron plugin requires strapi-redis plugin to be installed and configured')
   }

@@ -12,7 +12,6 @@ module.exports = ({ strapi }) => {
         const connections = Object.keys(strapi.redis.connections).map((key) => {
           return strapi.redis.connections[key].client
         })
-        console.log(config.redlockConfig)
         const redlock = new Redlock(connections, config.redlockConfig)
 
         let lock
