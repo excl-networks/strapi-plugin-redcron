@@ -97,6 +97,8 @@ module.exports = {
 
 Adding the `bypassRedcron` property to your cron job will bypass the redlock logic and allow multiple instances of Strapi to run the same cron job at the same time.
 
+This plugin requires you to use the object format of the cron config. Adding a `name` is encouraged but not required. If you don't add a name it will use the key as the name. If you have multiple cron jobs with overlapping names this could cause issues.
+
 Example:
 ```js
 // path: ./config/cron-tasks.js
