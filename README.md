@@ -162,3 +162,13 @@ and running
 ## License
 
 See the [LICENSE](./LICENSE.md) file for licensing information.
+
+## ⭐️Did you find this helpful?
+If you found this plugin helpful give it a star?
+
+
+## Links
+
+ - [NPM Package](https://www.npmjs.com/package/strapi-plugin-ezforms)
+ - [Github](https://github.com/excl-networks/strapi-plugin-ezforms)
+ - [MIT License](LICENSE.md)
