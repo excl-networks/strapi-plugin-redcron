@@ -35,7 +35,7 @@
 
 Drop-in* replacement for the Strapi cron plugin that uses Redlock to prevent multiple instances of Strapi from running the same cron job at the same time.
 
-- requires minimal configuration
+\* requires minimal configuration
 
 ## 🤔 Motivation
 
