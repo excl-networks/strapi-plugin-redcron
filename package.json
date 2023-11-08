@@ -1,6 +1,6 @@
 {
   "name": "strapi-plugin-redcron",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "A drop in replacement for the Strapi cron plugin that uses Redlock to prevent multiple instances of Strapi from running the same cron job at the same time.",
   "strapi": {
     "name": "redcron",
