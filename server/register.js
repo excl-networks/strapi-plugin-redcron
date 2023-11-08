@@ -16,7 +16,7 @@ module.exports = ({ strapi }) => {
 
         let lock
         try {
-          lock = await redlock.acquire(name, config.lockTTL)
+          lock = await redlock.acquire([name], config.lockTTL)
           debug(`Job ${name} acquired lock`)
           await originalFunction(...args)
         } catch (e) {
